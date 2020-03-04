@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block contentblock%}
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1 class="display-4 text-center my-4"> Rental List </h1>
+<div class="row">
+
+    <div class="col-md-8 mx-auto">
+        <table class="table table-stripped">
+            <thead>
+            <tr class="text-center">
+                <th>Parking Name</th>
+                <th>First day of rental</th>
+                <th>Price</th>
+                <th>Renter</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for rental in rentals_list.items %}
+            <tr class="text-center">
+
+                <td>
+                <a href='{{ url_for('rental_detail', id=rental.id)}}' method="get" >{{rental.parking.name}}</a>
+
+                </td>
+
+                 <td>
+                {{rental.beg_date}}
+                </td>
+                 <td>
+                {{rental.price}}
+                </td>
+                <td>
+                {{rental.renter_name}}
+                </td>
+                <td>
+                <a href='{{ url_for('rental_update', id=rental.id) }}'><button class="btn btn-primary btn-sm">&nbsp;&nbsp;&nbsp;Edit&nbsp;&nbsp;&nbsp;
+                </button></a>
+
+                </td>
+                <td>
+                  <button class="btn btn-danger btn-sm">Delete </button></a>
+
+                </td>
+            </tr>
+
+        {% endfor %}
+            </tbody>
+            </table>
+            <div class="row">
+            {% if prev_url %}
+            <a href="{{ prev_url }}">Previous </a>
+            |
+            {% endif %}
+
+            {% if next_url %}
+            <a href="{{ next_url }}"> Next</a>
+            {% endif %}
+            </div>
+
+    </div>
+
+
+
+</div>
+
+  {% for page in rentals_list.iter_pages() %}
+    {% if page %}
+      {% if page != rentals_list.page %}
+        <a href="{{ url_for('rentals_list', page=page) }}">{{ page }}</a>
+      {% else %}
+        <strong>{{ page }}</strong>
+      {% endif %}
+    {% else %}
+      <span class=ellipsis>…</span>
+    {% endif %}
+  {% endfor %}
+  </div>
+{% endblock %}

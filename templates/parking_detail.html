@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block contentblock %}
+<h1 class="dicplay-4">Parking details</h1>
+<p>Parking name: {{parking.name}}</p>
+<p>Parking address: {{parking.address}}</p>
+<p>Parking price: {{parking.price}}</p>
+   <div class="row">
+        <div class="col-md-6">
+            <a href="{{ url_for('parkings_list') }}">
+                <button class="btn btn-outline-primary">Back to parkings list</button>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

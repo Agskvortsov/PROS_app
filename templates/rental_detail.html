@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block contentblock %}
+<div class="container">
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{ message }}
+  </div>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+{% if error %}
+<div class="alert alert-warning">
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+{{ error }}
+{% endif %}
+</div>
+
+<h1 class="dicplay-4">Rental details</h1>
+<p>Parking name: {{parking_name}}</p>
+<p>Date of rental begining: {{rental.beg_date}}</p>
+<p>Parking price: {{rental.price}}</p>
+<p>Renter name: {{rental.renter_name}}</p>
+<p>Renter mobile number: {{rental.renter_mob_num}}</p>
+   <div class="row">
+        <div class="col-md-6">
+            <a href="{{ url_for('rentals_list') }}">
+                <button class="btn btn-outline-primary">Back to rentals list</button>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block contentblock%}
+
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% if form.errors %}
+  <div class="alert alert-warning">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  {{ form.errors }}
+{% endif %}
+</div>
+
+
+
+<h1 class="display-4 text-center my-4"> Update parking </h1>
+<div class="row">
+
+    <div class="col-md-8 mx-auto">
+    <form method="post" action="">
+    {{ form.csrf_token }}
+    {% for field in form %}
+    {% if field != form.csrf_token %}
+    <p>
+    <p>
+    <h5 class="my-0" > {{ field.label }} </h5>
+    {{ field(size=50) }}
+    {% endif %}
+    {% endfor %}
+    <p>
+    <h5 class="my-0"> Update <input type="submit" formmethod="post" formaction="{{ url_for('rental_update', id=id)}}" class="btn btn-outline-primary" value="Update"></h5>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

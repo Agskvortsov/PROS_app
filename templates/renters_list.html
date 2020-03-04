@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block contentblock%}
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+    </div>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1 class="display-4 text-center my-4"> Renters List </h1>
+<div class="row">
+
+    <div class="col-md-8 mx-auto">
+        <table class="table table-stripped">
+            <thead>
+            <tr class="text-center">
+                <th>Renter Name</th>
+                <th>Renter mobile number</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for renter in renters.renters %}
+            <tr class="text-center">
+
+
+                 <td>
+                {{renter.name}}
+                </td>
+                 <td>
+                {{renter.mob_num}}
+                </td>
+            </tr>
+
+        {% endfor %}
+            </tbody>
+            </table>
+            <div class="row">
+            {% if prev_url %}
+            <a href="{{ prev_url }}">Previous </a>
+            |
+            {% endif %}
+
+            {% if next_url %}
+            <a href="{{ next_url }}"> Next</a>
+            {% endif %}
+            </div>
+
+    </div>
+
+
+
+</div>
+
+{% endblock %}
