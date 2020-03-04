@@ -18,10 +18,6 @@ app.config['POST_PER_PAGE'] = 5
 app.secret_key = 'Alex'
 
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
-
 
 def is_logged_in(f):
     @wraps(f)
